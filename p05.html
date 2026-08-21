@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年 成都医学院第一附属医院核心交换机采购 — 招标文件解读</title>
+<style>
+:root {
+  --bg: #f5f7fa; --card: #ffffff; --border: #e2e8f0;
+  --primary: #2563eb; --primary-light: #dbeafe;
+  --success: #16a34a; --success-light: #dcfce7;
+  --warning: #d97706; --warning-light: #fef3c7;
+  --danger: #dc2626; --danger-light: #fee2e2;
+  --text: #1e293b; --text-muted: #64748b;
+  --purple: #7c3aed; --purple-light: #ede9fe;
+  --teal: #0891b2; --teal-light: #cffafe;
+  --orange: #ea580c; --orange-light: #ffedd5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.page-header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #fff; padding: 24px 32px; }
+.page-header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.page-header .subtitle { font-size: 13px; opacity: .8; }
+.page-header .meta-row { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+.meta-chip { background: rgba(255,255,255,.15); border-radius: 6px; padding: 4px 12px; font-size: 12px; }
+.meta-chip b { margin-right: 4px; }
+.time-nodes-section { margin: 0 32px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.time-nodes-header { display: flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #0891b2, #06b6d4); color: #fff; padding: 10px 20px; font-size: 14px; font-weight: 700; }
+.time-nodes-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.time-nodes-table th { background: var(--teal-light); color: var(--teal); padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border); }
+.time-nodes-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.time-nodes-table tr:last-child td { border-bottom: none; }
+.time-nodes-table .urgent-row { background: var(--danger-light); }
+.time-nodes-table .urgent-row td:first-child { border-left: 4px solid var(--danger); }
+.countdown-text { font-weight: 700; }
+.countdown-text.urgent { color: var(--danger); }
+.countdown-text.warning { color: var(--warning); }
+.countdown-text.normal { color: var(--success); }
+.mandatory-yes { color: var(--danger); font-weight: 700; }
+.mandatory-no { color: var(--text-muted); }
+.time-nodes-note { padding: 10px 16px; font-size: 12px; background: var(--warning-light); color: var(--warning); border-top: 1px solid #fde68a; display: flex; align-items: flex-start; gap: 6px; }
+.progress-bar-wrap { background: #fff; padding: 16px 32px; border-bottom: 1px solid var(--border); }
+.progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+.progress-bar-bg { background: #e2e8f0; border-radius: 999px; height: 10px; }
+.progress-bar-fill { background: linear-gradient(90deg, #2563eb, #16a34a); height: 10px; border-radius: 999px; width: 0%; transition: width .4s; }
+.progress-stats { display: flex; gap: 16px; margin-top: 8px; }
+.stat-chip { font-size: 12px; padding: 2px 10px; border-radius: 999px; font-weight: 600; }
+.stat-done { background: var(--success-light); color: var(--success); }
+.stat-warn { background: var(--warning-light); color: var(--warning); }
+.stat-total { background: var(--primary-light); color: var(--primary); }
+.judgment-card { margin: 20px 32px; background: var(--card); border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; }
+.judgment-card .card-title { background: var(--primary); color: #fff; padding: 10px 20px; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.judgment-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.judgment-table th { background: var(--primary-light); color: var(--primary); padding: 8px 16px; text-align: left; font-weight: 600; }
+.judgment-table td { padding: 8px 16px; border-bottom: 1px solid var(--border); }
+.judgment-table tr:last-child td { border-bottom: none; }
+.judgment-card .filter-note { padding: 10px 16px; font-size: 12px; background: var(--warning-light); color: var(--warning); border-top: 1px solid #fde68a; }
+.badge-ok { background: var(--success-light); color: var(--success); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.badge-warn { background: var(--warning-light); color: var(--warning); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.badge-risk { background: var(--danger-light); color: var(--danger); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.badge-info { background: var(--primary-light); color: var(--primary); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.risk-summary { margin: 0 32px 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.risk-card { background: var(--card); border-radius: 10px; padding: 14px 16px; border-left: 4px solid; }
+.risk-card.high { border-color: var(--danger); }
+.risk-card.med { border-color: var(--warning); }
+.risk-card.low { border-color: var(--success); }
+.risk-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+.risk-card.high h4 { color: var(--danger); }
+.risk-card.med h4 { color: var(--warning); }
+.risk-card.low h4 { color: var(--success); }
+.risk-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.section { margin: 0 32px 20px; }
+.section-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 20px; user-select: none; transition: background .15s; }
+.section-header:hover { background: #f8fafc; }
+.section-header-left { display: flex; align-items: center; gap: 10px; }
+.section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.section-title { font-size: 14px; font-weight: 700; }
+.section-count { font-size: 12px; color: var(--text-muted); margin-left: 6px; }
+.section-arrow { font-size: 12px; color: var(--text-muted); transition: transform .2s; }
+.section-arrow.open { transform: rotate(90deg); }
+.section-body { background: var(--card); border: 1px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; overflow: hidden; display: none; }
+.section-body.open { display: block; }
+.check-item { display: flex; align-items: flex-start; padding: 10px 20px; border-bottom: 1px solid var(--border); gap: 10px; transition: background .12s; }
+.check-item:last-child { border-bottom: none; }
+.check-item:hover { background: #f8fafc; }
+.check-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0; }
+.check-label { flex: 1; font-size: 13px; cursor: pointer; }
+.check-label .item-title { font-weight: 600; display: block; margin-bottom: 2px; }
+.check-label .item-desc { font-size: 12px; color: var(--text-muted); }
+.check-label .item-ref { font-size: 11px; color: var(--primary); background: var(--primary-light); border-radius: 4px; padding: 1px 6px; display: inline-block; margin-top: 3px; }
+.item-priority { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; flex-shrink: 0; margin-top: 2px; }
+.p-critical { background: var(--danger-light); color: var(--danger); }
+.p-high { background: var(--warning-light); color: var(--warning); }
+.p-normal { background: var(--primary-light); color: var(--primary); }
+.p-low { background: #f1f5f9; color: var(--text-muted); }
+.p-bonus { background: var(--success-light); color: var(--success); }
+.score-section { margin: 0 32px 20px; }
+.score-section > h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.score-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 12px; }
+.score-table th { background: #1e3a8a; color: #fff; padding: 8px 12px; text-align: left; }
+.score-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.score-table tr:last-child td { border-bottom: none; }
+.gap-section { margin: 0 32px 20px; }
+.gap-section > h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.gap-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 12px; }
+.gap-table th { background: #f1f5f9; padding: 8px 14px; text-align: left; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.gap-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.gap-table tr:last-child td { border-bottom: none; }
+.urg-critical { color: var(--danger); font-weight: 700; }
+.urg-high { color: var(--warning); font-weight: 700; }
+.urg-normal { color: var(--primary); }
+.contract-section { margin: 0 32px 20px; }
+.contract-section > h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.contract-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 12px; }
+.contract-table th { background: #fef2f2; padding: 8px 12px; text-align: left; font-weight: 700; color: var(--danger); border-bottom: 1px solid var(--border); }
+.contract-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.contract-table tr:last-child td { border-bottom: none; }
+.page-footer { margin: 0 32px 40px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 12px; color: var(--text-muted); text-align: center; }
+.back-link { display: inline-block; margin: 16px 32px 0; padding: 8px 16px; background: var(--primary); color: #fff; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; }
+.back-link:hover { background: #1e40af; }
+.detail-box { margin: 0 32px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.detail-box h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+.detail-box p { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+.detail-box ul { margin-left: 20px; font-size: 13px; color: var(--text); }
+.detail-box li { margin-bottom: 6px; }
+@media (max-width: 768px) {
+  .page-header, .progress-bar-wrap { padding: 16px; }
+  .judgment-card, .risk-summary, .section, .gap-section, .score-section, .contract-section, .page-footer, .time-nodes-section, .detail-box, .back-link { margin-left: 16px; margin-right: 16px; }
+  .risk-summary { grid-template-columns: 1fr; }
+  .meta-row { gap: 8px; }
+  .time-nodes-table { font-size: 11px; }
+  .time-nodes-table th, .time-nodes-table td { padding: 6px 8px; }
+}
+</style>
+</head>
+<body>
+<a class="back-link" href="../index.html">← 返回项目总览</a>
+<div class="page-header">
+  <h1>2026年 成都医学院第一附属医院核心交换机采购</h1>
+  <div class="subtitle">成都医学院第一附属医院 | 招标预告 | 来源：成都医学院第一附属医院</div>
+  <div class="meta-row">
+    <div class="meta-chip"><b>发布日期：</b>2026-08-12</div>
+    <div class="meta-chip"><b>预算金额：</b>60万元</div>
+    <div class="meta-chip"><b>采购方式：</b>政府采购（预告阶段）</div>
+    <div class="meta-chip"><b>地区：</b>四川-成都</div>
+    <div class="meta-chip"><b>服务期：</b>设备采购（一次性）</div>
+  </div>
+</div>
+
+<div class="time-nodes-section">
+  <div class="time-nodes-header">⏰ 关键时间节点</div>
+  <table class="time-nodes-table">
+    <thead><tr><th style="width:18%">事项</th><th style="width:20%">时间</th><th style="width:12%">剩余天数</th><th style="width:10%">是否强制</th><th style="width:40%">备注</th></tr></thead>
+    <tbody><tr class="">
+          <td>预告发布</td><td>2026-08-12</td><td class="countdown-text normal">已发布</td>
+          <td class="mandatory-no">否</td><td>政府采购意向</td></tr><tr class="">
+          <td>正式采购启动</td><td>待定</td><td class="countdown-text normal">—</td>
+          <td class="mandatory-no">—</td><td>需关注后续正式公告</td></tr></tbody>
+  </table>
+  <div class="time-nodes-note"><span>⚠️</span><div>请关注各时间节点，逾期可能无法参与投标或作废。</div></div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-label"><span>投标准备进度</span><span id="pct-text">0%</span></div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-fill"></div></div>
+  <div class="progress-stats">
+    <span class="stat-chip stat-done" id="done-count">✔ 已完成 0</span>
+    <span class="stat-chip stat-warn" id="pending-count">⏳ 待确认 0</span>
+    <span class="stat-chip stat-total" id="total-count">📝 总计 0</span>
+  </div>
+</div>
+
+<div class="judgment-card">
+  <div class="card-title">⚡ 投标方式判定结论</div>
+  <table class="judgment-table">
+    <tr><th style="width:18%">判定维度</th><th style="width:22%">判定结果</th><th style="width:40%">依据</th><th style="width:20%">状态</th></tr>
+    <tr><td><b>采购方式</b></td><td>政府采购（预告）</td><td>政府采购意向项目</td><td><span class="badge-warn">⚠️ 预告</span></td></tr><tr><td><b>评标方法</b></td><td>待确认</td><td>预告阶段未公布</td><td><span class="badge-warn">⚠️ 待确认</span></td></tr><tr><td><b>最高限价</b></td><td>60万元</td><td>预算金额已明确</td><td><span class="badge-ok">✅ 已明确</span></td></tr><tr><td><b>采购数量</b></td><td>4项</td><td>预告明确采购4项交换设备</td><td><span class="badge-ok">✅ 已明确</span></td></tr><tr><td><b>采购品目</b></td><td>交换设备</td><td>预告已明确</td><td><span class="badge-ok">✅ 已明确</span></td></tr>
+  </table>
+</div>
+
+<div class="risk-summary"><div class="risk-card high"><h4>🔴 高风险</h4><p>医院核心交换机要求高可靠性，技术门槛较高</p></div>
+    <div class="risk-card med"><h4>🟡 中风险</h4><p>60万预算4项设备，单价空间需精算<br>政府采购项目流程规范，需准备完整投标材料</p></div>
+    <div class="risk-card low"><h4>🟢 低风险</h4><p>设备采购类项目，技术规格较明确<br>医院为老客户方向，有合作基础</p></div></div>
+
+<div class="detail-box">
+  <h3>🎯 项目要点</h3>
+  <ul><li>预算60万元，采购交换设备4项</li><li>核心需求：高可靠核心交换机</li><li>医院业务网络核心承载需求</li><li>政府采购意向项目，2026年度</li><li>目前为预告阶段，需关注正式公告</li><li>与项目6（等保整改）为同客户同期项目</li></ul>
+</div>
+
+<div class="detail-box">
+      <h3>项目概况</h3>
+      <table class="score-table"><tr><td style="width:30%;font-weight:600;">项目名称</td><td>2026年 成都医学院第一附属医院核心交换机采购</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">采购人</td><td>成都医学院第一附属医院</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">预算金额</td><td>60万元</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">采购数量</td><td>交换设备4项</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">采购品目</td><td>交换设备</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">核心需求</td><td>高可靠核心交换机，满足医院业务网络核心承载</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr><tr><td style="width:30%;font-weight:600;">项目类型</td><td>2026年度政府采购意向项目</td><td style="width:25%;"><span class="item-ref">采购意向</span></td></tr></table>
+    </div><div class="detail-box">
+      <h3>技术需求预估</h3>
+      <table class="score-table"><tr><td style="width:30%;font-weight:600;">设备类型</td><td>核心交换机（高可靠性）</td><td style="width:25%;"><span class="item-ref">基于核心承载需求预估</span></td></tr><tr><td style="width:30%;font-weight:600;">关键指标</td><td>高可用、冗余设计、万兆/千兆端口</td><td style="width:25%;"><span class="item-ref">基于医院核心网络需求预估</span></td></tr><tr><td style="width:30%;font-weight:600;">品牌范围</td><td>华为/华三/锐捷等主流品牌</td><td style="width:25%;"><span class="item-ref">⚠️ 需人工确认</span></td></tr><tr><td style="width:30%;font-weight:600;">安装调试</td><td>可能含安装调试和配置服务</td><td style="width:25%;"><span class="item-ref">⚠️ 需人工确认</span></td></tr><tr><td style="width:30%;font-weight:600;">售后服务</td><td>可能要求3-5年原厂维保</td><td style="width:25%;"><span class="item-ref">⚠️ 需人工确认</span></td></tr></table>
+    </div><div class="detail-box">
+      <h3>投标建议</h3>
+      <table class="score-table"><tr><td style="width:30%;font-weight:600;">跟踪公告</td><td>密切关注成都医学院第一附属医院采购公告</td><td style="width:25%;"><span class="item-ref">重要</span></td></tr><tr><td style="width:30%;font-weight:600;">设备预选</td><td>提前确定高可靠核心交换机品牌型号</td><td style="width:25%;"><span class="item-ref">重要</span></td></tr><tr><td style="width:30%;font-weight:600;">成本核算</td><td>60万/4项，平均15万/项，需精算成本</td><td style="width:25%;"><span class="item-ref">重要</span></td></tr><tr><td style="width:30%;font-weight:600;">联动项目</td><td>与项目6（等保整改）联动，可打包方案</td><td style="width:25%;"><span class="item-ref">加分</span></td></tr><tr><td style="width:30%;font-weight:600;">客户关系</td><td>医院为重点客户方向，提前沟通需求</td><td style="width:25%;"><span class="item-ref">加分</span></td></tr></table>
+    </div>
+
+<div class="section">
+      <div class="section-header" onclick="toggleSection('sec-1')">
+        <div class="section-header-left">
+          <div class="section-icon" style="background:var(--primary-light);color:var(--primary);">📋</div>
+          <span class="section-title">项目跟踪</span>
+          <span class="section-count">(4项)</span>
+        </div>
+        <span class="section-arrow" id="arr-sec-1">▶</span>
+      </div>
+      <div class="section-body" id="body-sec-1"><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">关注成都医学院第一附属医院官网和政府采购网</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">获取正式招标文件</span></div>
+            <span class="item-priority p-critical">紧急</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">确认4项设备的具体型号和参数</span></div>
+            <span class="item-priority p-critical">紧急</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">确认资格要求和评标方法</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div></div>
+    </div><div class="section">
+      <div class="section-header" onclick="toggleSection('sec-2')">
+        <div class="section-header-left">
+          <div class="section-icon" style="background:var(--warning-light);color:var(--warning);">📋</div>
+          <span class="section-title">资质与方案准备</span>
+          <span class="section-count">(5项)</span>
+        </div>
+        <span class="section-arrow" id="arr-sec-2">▶</span>
+      </div>
+      <div class="section-body" id="body-sec-2"><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">营业执照（含计算机/网络设备销售）</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">设备供应商授权书</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">类似医院项目业绩</span></div>
+            <span class="item-priority p-bonus">加分</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">编制技术方案和报价表</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div><div class="check-item">
+            <input type="checkbox" onchange="updateProgress()">
+            <div class="check-label"><span class="item-title">准备售后服务承诺方案</span></div>
+            <span class="item-priority p-high">重要</span>
+          </div></div>
+    </div>
+
+<div class="gap-section">
+  <h3>🚨 关键缺口清单</h3>
+  <table class="gap-table">
+    <tr><th style="width:8%">优先级</th><th style="width:25%">缺口项目</th><th style="width:40%">说明</th><th style="width:27%">补救建议</th></tr>
+    <tr><td class="urg-critical">紧急</td><td>正式招标文件</td><td>当前为预告阶段</td><td>关注后续公告</td></tr><tr><td class="urg-high">重要</td><td>具体设备型号和参数</td><td>4项设备的具体规格未明确</td><td>获取正式文件</td></tr><tr><td class="urg-high">重要</td><td>资格要求</td><td>企业资质和业绩要求未公布</td><td>关注正式公告</td></tr><tr><td class="urg-normal">正常</td><td>是否含安装</td><td>是否包含安装调试服务</td><td>确认正式文件</td></tr>
+  </table>
+</div>
+
+<div class="detail-box">
+  <h3>📎 消息来源</h3>
+  <p>来源：成都医学院第一附属医院 | <a href="http://www.qianlima.com/zb/detail/20260812_621553723.html" target="_blank" style="color:var(--primary);">查看原始公告 →</a></p>
+</div>
+
+<div class="page-footer">
+  📋 本解读基于《2026年 成都医学院第一附属医院核心交换机采购》公开信息自动生成 | 生成日期：2026-08-21 |
+  <b>⚠️ 不确定项请标记并人工确认；不允许伪造资质、案例、证书、报价</b><br>
+  <small>本工具由电信数智-集成服务部-产数交付支撑中心开发提供</small>
+</div>
+
+<script>
+function toggleSection(id) {
+  const body = document.getElementById('body-' + id);
+  const arrow = document.getElementById('arr-' + id);
+  if (body.classList.contains('open')) { body.classList.remove('open'); arrow.classList.remove('open'); }
+  else { body.classList.add('open'); arrow.classList.add('open'); }
+}
+function updateProgress() {
+  const all = document.querySelectorAll('.check-item input[type="checkbox"]');
+  const checked = document.querySelectorAll('.check-item input[type="checkbox"]:checked');
+  const total = all.length, done = checked.length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('pct-text').textContent = pct + '%';
+  document.getElementById('done-count').textContent = '✔ 已完成 ' + done;
+  document.getElementById('pending-count').textContent = '⏳ 待确认 ' + (total - done);
+  document.getElementById('total-count').textContent = '📝 总计 ' + total;
+  all.forEach(cb => { const item = cb.closest('.check-item'); if (cb.checked) item.classList.add('checked'); else item.classList.remove('checked'); });
+}
+window.addEventListener('DOMContentLoaded', () => {
+  updateProgress();
+  const firstSec = document.querySelector('[id^="body-sec-"]');
+  if (firstSec) { firstSec.classList.add('open'); const arr = document.getElementById(firstSec.id.replace('body','arr')); if(arr) arr.classList.add('open'); }
+});
+</script>
+</body>
+</html>
