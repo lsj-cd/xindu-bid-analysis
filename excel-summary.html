@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新都区招投标信息汇总（9.19）— 新都云中台</title>
+<style>
+  :root {
+    --bg: #f5f7fa; --card: #ffffff; --border: #e2e8f0;
+    --primary: #2563eb; --primary-light: #dbeafe;
+    --success: #16a34a; --success-light: #dcfce7;
+    --warning: #d97706; --warning-light: #fef3c7;
+    --danger: #dc2626; --danger-light: #fee2e2;
+    --text: #1e293b; --text-muted: #64748b;
+    --teal: #0891b2; --teal-light: #cffafe;
+    --purple: #7c3aed; --purple-light: #ede9fe;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Microsoft YaHei','PingFang SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .page-header { background: linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#0891b2 100%); color: #fff; padding: 32px 40px; }
+  .page-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .page-header .subtitle { font-size: 14px; opacity: .85; }
+  .page-header .meta-row { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,.15); border-radius: 6px; padding: 5px 14px; font-size: 12px; }
+  .meta-chip b { margin-right: 4px; }
+
+  .stats-row { display: flex; gap: 16px; padding: 24px 40px; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 120px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .stat-card .stat-num { font-size: 28px; font-weight: 800; }
+  .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .stat-card.total .stat-num { color: var(--primary); }
+  .stat-card.active .stat-num { color: var(--danger); }
+  .stat-card.preview .stat-num { color: var(--warning); }
+  .stat-card.done .stat-num { color: var(--success); }
+  .stat-card.research .stat-num { color: var(--purple); }
+
+  .table-section { padding: 0 40px 40px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); font-size: 13px; }
+  thead th { background: #1e3a8a; color: #fff; padding: 12px 14px; text-align: left; font-weight: 600; font-size: 13px; white-space: nowrap; position: sticky; top: 0; z-index: 1; }
+  tbody td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody tr:hover { background: #eff6ff; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .row-num { width: 36px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .num-active { background: var(--danger-light); color: var(--danger); }
+  .num-preview { background: var(--warning-light); color: var(--warning); }
+  .num-done { background: var(--success-light); color: var(--success); }
+  .num-research { background: var(--purple-light); color: var(--purple); }
+
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+  .badge-active { background: var(--danger-light); color: var(--danger); }
+  .badge-preview { background: var(--warning-light); color: var(--warning); }
+  .badge-done { background: var(--success-light); color: var(--success); }
+  .badge-research { background: var(--purple-light); color: var(--purple); }
+  .badge-contract { background: var(--teal-light); color: var(--teal); }
+
+  .cell-title { font-weight: 600; color: var(--text); max-width: 340px; }
+  .cell-summary { color: var(--text-muted); font-size: 12px; max-width: 320px; }
+  .cell-amount { font-weight: 700; color: var(--teal); white-space: nowrap; }
+  .cell-date { color: var(--text-muted); white-space: nowrap; font-size: 12px; }
+  .cell-link a { color: var(--primary); text-decoration: none; font-size: 12px; }
+  .cell-link a:hover { text-decoration: underline; }
+  .cell-analysis a { color: var(--primary); text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 3px; padding: 5px 12px; background: var(--primary-light); border-radius: 6px; white-space: nowrap; }
+  .cell-analysis a:hover { background: var(--primary); color: #fff; }
+  .cell-link-null { color: var(--text-muted); font-size: 12px; }
+
+  .page-footer { margin: 0 40px 40px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; font-size: 12px; color: var(--text-muted); text-align: center; }
+
+  @media (max-width: 1200px) {
+    .table-section { padding: 0 20px 20px; }
+    .stats-row { padding: 16px 20px; }
+    .page-header { padding: 24px 20px; }
+    .cell-title, .cell-summary { max-width: none; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>新都区招投标信息汇总（9.19）</h1>
+  <div class="subtitle">新都云中台 | IT相关招投标项目信息汇总</div>
+  <div class="meta-row">
+    <div class="meta-chip"><b>数据周期：</b>2026年9月</div>
+    <div class="meta-chip"><b>数据来源：</b>千里马招标网 / 四川政府采购网 / 客户官网</div>
+    <div class="meta-chip"><b>更新日期：</b>2026-09-20</div>
+    <div class="meta-chip"><b>项目总数：</b>11</div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card total"><div class="stat-num">11</div><div class="stat-label">总项目数</div></div>
+  <div class="stat-card active"><div class="stat-num">1</div><div class="stat-label">可投标（活跃）</div></div>
+  <div class="stat-card preview"><div class="stat-num">3</div><div class="stat-label">招标预告</div></div>
+  <div class="stat-card research"><div class="stat-num">1</div><div class="stat-label">调研/征集</div></div>
+  <div class="stat-card done"><div class="stat-num">4</div><div class="stat-label">已成交/结束</div></div>
+  <div class="stat-card preview" style="border-color:var(--teal);"><div class="stat-num" style="color:var(--teal);">2</div><div class="stat-label">招标公告</div></div>
+</div>
+
+<div class="table-section">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:50px">序号</th>
+        <th style="width:300px">标题</th>
+        <th style="width:90px">信息类型</th>
+        <th style="width:100px">发布时间</th>
+        <th style="width:90px">金额</th>
+        <th style="width:280px">内容摘要</th>
+        <th style="width:160px">链接</th>
+        <th style="width:140px">招标分析</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td><span class="row-num num-research">01</span></td>
+        <td class="cell-title">成都市新都区卫生健康局关于网络和数据安全及机房基础设施运维服务项目的市场调研公告</td>
+        <td><span class="badge badge-preview">招标预告</span></td>
+        <td class="cell-date">2026-09-19</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">招标预告，成都市新都区卫生健康局关于网络和数据安全及机房基础设施运维服</td>
+        <td class="cell-link"><span class="cell-link-null">/（无链接）</span></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_01.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-preview">02</span></td>
+        <td class="cell-title">西南石油大学2026年政府采购意向公开（第26批）</td>
+        <td><span class="badge badge-preview">招标预告</span></td>
+        <td class="cell-date">2026-09-18</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">西南石油大学2026年采购意向第26批：含光网改造123.8万、全重室光纤交换机16.2万、数据中心服务器126万、分布式存储75万、网络安全加固26万、数据管</td>
+        <td class="cell-link"><a href="http://cwcggl.swpu.edu.cn/index.chtml" target="_blank">西南石油大学官网 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_02.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-active">03</span></td>
+        <td class="cell-title">成都市新都区第三人民医院2026年网络安全等级保护及商用密码测评服务采购项目招标公告</td>
+        <td><span class="badge badge-active">招标公告</span></td>
+        <td class="cell-date">2026-09-17</td>
+        <td class="cell-amount">442,800元</td>
+        <td class="cell-summary">府采购监督管理机构（新都区财政局）联系电话：028-8939...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260917_632035736.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_03.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-preview">04</span></td>
+        <td class="cell-title">成都市新都区人民医院等保测评及商用密码应用安全性评估服务采购项目</td>
+        <td><span class="badge badge-preview">招标预告</span></td>
+        <td class="cell-date">2026-09-15</td>
+        <td class="cell-amount">400,000元</td>
+        <td class="cell-summary">成都市新都区人民医院2026年度政府采购意向公告(第17批)...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260915_631306254.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_04.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-done">05</span></td>
+        <td class="cell-title">成都市新都区中医医院弱电系统及网络设备维保服务采购项目合同政府采购合同公告</td>
+        <td><span class="badge badge-contract">合同公告</span></td>
+        <td class="cell-date">2026-09-15</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">购人(甲方)：成都市新都区中医医院 地址：四川省成都市新都区...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260915_631280424.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_05.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-preview">06</span></td>
+        <td class="cell-title">成都市新都区中医医院网络安全等级保护三级测评服务采购项目</td>
+        <td><span class="badge badge-preview">招标预告</span></td>
+        <td class="cell-date">2026-09-08</td>
+        <td class="cell-amount">252,000元</td>
+        <td class="cell-summary">成都市新都区中医医院2026年度政府采购意向公告(第25批)...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260908_629154720.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_06.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-active">07</span></td>
+        <td class="cell-title">成都市新都区融媒体中心（成都市新都区广播电视台）网络安全服务采购项目竞争性磋商采购公告</td>
+        <td><span class="badge badge-active">招标公告</span></td>
+        <td class="cell-date">2026-09-04</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">信息标题：成都市新都区融媒体中心（成都市新都区广播电视台）网...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260904_628251400.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_07.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-research">08</span></td>
+        <td class="cell-title">GPU云主机租赁服务调研公告</td>
+        <td><span class="badge badge-research">调研公告</span></td>
+        <td class="cell-date">2026-09-02</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">中医医院租GPU云主机部署DeepSeek 70B，9月9日截止</td>
+        <td class="cell-link"><a href="https://www.cdsxdqzyyy.cn/list/11.html" target="_blank">中医医院官网 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_08.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-done">09</span></td>
+        <td class="cell-title">成都市新都区中医医院弱电系统及网络设备维保服务采购项目中标（成交）结果公告</td>
+        <td><span class="badge badge-done">中标通知</span></td>
+        <td class="cell-date">2026-09-02</td>
+        <td class="cell-amount">240,000元</td>
+        <td class="cell-summary">成都市新都区中医医院弱电系统及网络设备维保服务采购项目中标（...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260902_627546375.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_09.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-done">10</span></td>
+        <td class="cell-title">智慧香城新型基础设施建设项目（一期）-新都区视觉中枢平台建设项目和空地联动城市全域巡检服务采购项目第三方测评服务采购中标公告</td>
+        <td><span class="badge badge-done">中标公告</span></td>
+        <td class="cell-date">2026-09-02</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">智慧香城新型基础设施建设项目（一期）涉及通信、网络。</td>
+        <td class="cell-link"><span class="cell-link-null">/（无链接）</span></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_10.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+      <tr>
+        <td><span class="row-num num-done">11</span></td>
+        <td class="cell-title">成都市新都区新都街道蜀都社区卫生服务中心2026年度网络隔离服务采购项目</td>
+        <td><span class="badge badge-done">中标通知</span></td>
+        <td class="cell-date">2026-09-01</td>
+        <td class="cell-amount">/</td>
+        <td class="cell-summary">购项目名称： 成都市新都区新都街道蜀都社区卫生服务中心202...</td>
+        <td class="cell-link"><a href="http://www.qianlima.com/zb/detail/20260901_627237210.html" target="_blank">千里马详情 ↗</a></td>
+        <td class="cell-analysis"><a href="https://lsj-cd.github.io/xindu-bid-analysis/project_11.html" target="_blank">查看分析 →</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="page-footer">
+  📋 本表基于公开信息整理 | 新都云中台 | 2026-09-20<br>
+  <b>⚠️ 不确定项请标记并人工确认；不允许伪造资质、案例、证书、报价</b>
+</div>
+
+</body>
+</html>
