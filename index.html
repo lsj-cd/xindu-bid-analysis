@@ -3,237 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新都区招投标信息周报 — 招标文件解读</title>
+<title>新都区招投标信息分析 — 项目总览</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
-.hero {
-  background: linear-gradient(135deg, #0c1e4f 0%, #1e3a8a 50%, #2563eb 100%);
-  padding: 48px 32px 32px; text-align: center;
-}
-.hero h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: 1px; }
-.hero .subtitle { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 20px; }
-.hero .stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-.hero .stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 12px 24px; text-align: center; }
-.hero .stat .num { font-size: 24px; font-weight: 800; color: #fff; }
-.hero .stat .label { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
-
-.filter-bar {
-  max-width: 1200px; margin: -20px auto 0; padding: 0 24px;
-  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 10;
-}
-.filter-chip {
-  padding: 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 600;
-  cursor: pointer; transition: all .2s; border: 1px solid rgba(255,255,255,.15);
-  background: rgba(255,255,255,.05); color: #94a3b8;
-}
-.filter-chip:hover { background: rgba(255,255,255,.1); color: #fff; }
-.filter-chip.active { background: #2563eb; color: #fff; border-color: #2563eb; }
-
-.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
-.project-card {
-  background: #1e293b; border: 1px solid rgba(255,255,255,.08); border-radius: 14px;
-  padding: 20px; cursor: pointer; transition: all .25s; position: relative; overflow: hidden;
-}
-.project-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, #2563eb, #06b6d4); opacity: 0; transition: opacity .25s;
-}
-.project-card:hover { transform: translateY(-3px); border-color: rgba(37,99,235,.3); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
-.project-card:hover::before { opacity: 1; }
-.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.stage-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; }
-.budget-badge { font-size: 12px; color: #94a3b8; }
-.card-title { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; line-height: 1.5; }
-.card-info { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #64748b; margin-bottom: 12px; }
-.card-info span { display: flex; align-items: center; gap: 4px; }
-.card-arrow { font-size: 12px; color: #2563eb; font-weight: 600; }
-
-.footer {
-  text-align: center; padding: 32px; color: #475569; font-size: 12px;
-  border-top: 1px solid rgba(255,255,255,.05); margin-top: 32px;
-}
-.footer a { color: #2563eb; text-decoration: none; }
-
-@media (max-width: 768px) {
-  .hero { padding: 32px 16px 24px; }
-  .hero h1 { font-size: 22px; }
-  .container { padding: 16px; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .filter-bar { padding: 0 12px; }
-}
+  :root {
+    --bg: #f5f7fa; --card: #ffffff; --border: #e2e8f0;
+    --primary: #2563eb; --primary-light: #dbeafe;
+    --success: #16a34a; --success-light: #dcfce7;
+    --warning: #d97706; --warning-light: #fef3c7;
+    --danger: #dc2626; --danger-light: #fee2e2;
+    --text: #1e293b; --text-muted: #64748b;
+    --teal: #0891b2; --teal-light: #cffafe;
+    --purple: #7c3aed; --purple-light: #ede9fe;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Microsoft YaHei','PingFang SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  
+  .page-header { background: linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#0891b2 100%); color: #fff; padding: 32px 40px; }
+  .page-header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .page-header .subtitle { font-size: 14px; opacity: .85; }
+  .page-header .meta-row { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,.15); border-radius: 6px; padding: 6px 14px; font-size: 13px; }
+  .meta-chip b { margin-right: 4px; }
+  
+  .stats-row { display: flex; gap: 16px; padding: 24px 40px; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 160px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-card .stat-num { font-size: 32px; font-weight: 800; }
+  .stat-card .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .stat-card.active .stat-num { color: var(--danger); }
+  .stat-card.preview .stat-num { color: var(--warning); }
+  .stat-card.done .stat-num { color: var(--success); }
+  .stat-card.total .stat-num { color: var(--primary); }
+  
+  .project-list { padding: 0 40px 40px; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; transition: box-shadow .2s, transform .1s; }
+  .project-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: translateY(-1px); }
+  .project-card-header { display: flex; align-items: center; padding: 16px 20px; gap: 16px; cursor: pointer; }
+  .project-number { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; flex-shrink: 0; }
+  .project-info { flex: 1; min-width: 0; }
+  .project-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .project-subtitle { font-size: 12px; color: var(--text-muted); }
+  .project-badges { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+  .badge-active { background: var(--danger-light); color: var(--danger); }
+  .badge-preview { background: var(--warning-light); color: var(--warning); }
+  .badge-done { background: var(--success-light); color: var(--success); }
+  .badge-research { background: var(--purple-light); color: var(--purple); }
+  .badge-type { background: var(--primary-light); color: var(--primary); }
+  .badge-amount { background: var(--teal-light); color: var(--teal); }
+  .project-link { display: inline-flex; align-items: center; gap: 4px; padding: 8px 16px; background: var(--primary); color: #fff; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; flex-shrink: 0; transition: background .2s; }
+  .project-link:hover { background: #1e3a8a; }
+  
+  .num-active { background: var(--danger-light); color: var(--danger); }
+  .num-preview { background: var(--warning-light); color: var(--warning); }
+  .num-done { background: var(--success-light); color: var(--success); }
+  .num-research { background: var(--purple-light); color: var(--purple); }
+  
+  .section-title-bar { padding: 24px 40px 12px; display: flex; align-items: center; gap: 8px; }
+  .section-title-bar h2 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .section-title-bar .section-icon { font-size: 22px; }
+  
+  .page-footer { margin: 0 40px 40px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; font-size: 12px; color: var(--text-muted); text-align: center; }
+  
+  @media (max-width: 768px) {
+    .page-header { padding: 20px; }
+    .stats-row { padding: 16px 20px; gap: 8px; }
+    .stat-card { min-width: 100px; padding: 14px 8px; }
+    .stat-card .stat-num { font-size: 24px; }
+    .project-list { padding: 0 20px 20px; }
+    .project-card-header { flex-wrap: wrap; gap: 8px; }
+    .project-title { white-space: normal; }
+    .project-badges { justify-content: flex-start; }
+  }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <h1>新都区招投标信息周报 — 招标文件解读</h1>
-  <div class="subtitle">2026年8月第三周 | 近两周 | 新都云中台</div>
-  <div class="stats">
-    <div class="stat"><div class="num">10</div><div class="label">项目总数</div></div>
-    <div class="stat"><div class="num">3</div><div class="label">招标公告</div></div>
-    <div class="stat"><div class="num">3</div><div class="label">招标预告</div></div>
-    <div class="stat"><div class="num">2</div><div class="label">意见征集</div></div>
-    <div class="stat"><div class="num">1</div><div class="label">候选人公示</div></div>
-    <div class="stat"><div class="num">2</div><div class="label">待报价/截止</div></div>
+<div class="page-header">
+  <h1>新都区招投标信息分析 — 项目总览</h1>
+  <div class="subtitle">新都云中台 | 11个IT相关招投标项目深度分析</div>
+  <div class="meta-row">
+    <div class="meta-chip"><b>数据周期：</b>2026年9月</div>
+    <div class="meta-chip"><b>数据来源：</b>千里马招标网 / 四川政府采购网 / 客户官网</div>
+    <div class="meta-chip"><b>生成日期：</b>2026-09-20</div>
   </div>
 </div>
 
-<div class="filter-bar">
-  <span class="filter-chip active" onclick="filterProjects('all', this)">全部项目</span>
-  <span class="filter-chip" onclick="filterProjects('招标公告', this)">招标公告</span>
-  <span class="filter-chip" onclick="filterProjects('招标预告', this)">招标预告</span>
-  <span class="filter-chip" onclick="filterProjects('意见征集', this)">意见征集</span>
-  <span class="filter-chip" onclick="filterProjects('候选人公示', this)">候选人公示</span>
+<div class="stats-row">
+  <div class="stat-card total">
+    <div class="stat-num">11</div>
+    <div class="stat-label">总项目数</div>
+  </div>
+  <div class="stat-card active">
+    <div class="stat-num">1</div>
+    <div class="stat-label">可投标（活跃）</div>
+  </div>
+  <div class="stat-card preview">
+    <div class="stat-num">4</div>
+    <div class="stat-label">招标预告</div>
+  </div>
+  <div class="stat-card done">
+    <div class="stat-num">5</div>
+    <div class="stat-label">已成交/结束</div>
+  </div>
+  <div class="stat-card preview" style="border-color:var(--purple);">
+    <div class="stat-num" style="color:var(--purple);">1</div>
+    <div class="stat-label">调研中</div>
+  </div>
 </div>
 
-<div class="container">
-  <div class="projects-grid" id="projectGrid">
-    <div class="project-card" onclick="window.location.href='p01.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#fef3c7;color:#d97706;">招标预告</span>
-        <span class="budget-badge">💰 270万元</span>
+<div class="section-title-bar">
+  <span class="section-icon">📋</span>
+  <h2>项目分析详情</h2>
+</div>
+
+<div class="project-list">
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-research">01</div>
+      <div class="project-info">
+        <div class="project-title">新都区卫生健康局网络和数据安全及机房运维服务市场调研</div>
+        <div class="project-subtitle">成都市新都区卫生健康局 | 2026-09-19 | 金额未公开</div>
       </div>
-      <h3 class="card-title">成都市公安局新都区分局2026-2028年度办公设备、网络系统维护服务采购项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-21</span>
-        <span>🏢 成都市公安局新都区分局</span>
-        <span>📡 千里马</span>
+      <div class="project-badges">
+        <span class="badge badge-research">市场调研</span>
+        <span class="badge badge-type">网络安全/机房运维</span>
       </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p02.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#dbeafe;color:#2563eb;">招标公告</span>
-        <span class="budget-badge">💰 未公布</span>
-      </div>
-      <h3 class="card-title">2026中国航发航空科技股份有限公司非涉密网络升级改造</h3>
-      <div class="card-info">
-        <span>📅 2026-08-21</span>
-        <span>🏢 中国航发航空科技股份有限公司</span>
-        <span>📡 客户官网</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p03.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#dbeafe;color:#2563eb;">招标公告</span>
-        <span class="budget-badge">💰 1987.64万元</span>
-      </div>
-      <h3 class="card-title">四川乐送物流股份有限公司网络货运平台服务供应商采购项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-19</span>
-        <span>🏢 四川乐送物流股份有限公司</span>
-        <span>📡 千里马</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p04.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#dcfce7;color:#16a34a;">候选人公示</span>
-        <span class="budget-badge">💰 未公布</span>
-      </div>
-      <h3 class="card-title">成都香城档案科技有限公司核心交换机、下一代防火墙及精密空调等硬件设备采购项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-18</span>
-        <span>🏢 成都香城档案科技有限公司</span>
-        <span>📡 香投集团</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p05.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#fef3c7;color:#d97706;">招标预告</span>
-        <span class="budget-badge">💰 60万元</span>
-      </div>
-      <h3 class="card-title">2026年 成都医学院第一附属医院核心交换机采购</h3>
-      <div class="card-info">
-        <span>📅 2026-08-12</span>
-        <span>🏢 成都医学院第一附属医院</span>
-        <span>📡 成都医学院第一附属医院</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p06.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#fef3c7;color:#d97706;">招标预告</span>
-        <span class="budget-badge">💰 60万元</span>
-      </div>
-      <h3 class="card-title">2026年 成都医学院第一附属医院网络安全等保整改</h3>
-      <div class="card-info">
-        <span>📅 2026-08-12</span>
-        <span>🏢 成都医学院第一附属医院</span>
-        <span>📡 成都医学院第一附属医院</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p07.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#dbeafe;color:#2563eb;">招标公告</span>
-        <span class="budget-badge">💰 3万元</span>
-      </div>
-      <h3 class="card-title">成都市新都区新都街道蜀都社区卫生服务中心2026年度网络隔离服务采购项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-11</span>
-        <span>🏢 蜀都社区卫生服务中心</span>
-        <span>📡 千里马</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p08.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#ede9fe;color:#7c3aed;">意见征集</span>
-        <span class="budget-badge">💰 未公布</span>
-      </div>
-      <h3 class="card-title">成都医学院第一附属医院接入型交换机采购市场调研公告</h3>
-      <div class="card-info">
-        <span>📅 2026-08-11</span>
-        <span>🏢 成都医学院第一附属医院</span>
-        <span>📡 成都医学院第一附属医院</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p09.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#dbeafe;color:#2563eb;">招标公告</span>
-        <span class="budget-badge">💰 72万元</span>
-      </div>
-      <h3 class="card-title">成都市新都区中医医院弱电系统及网络设备维保服务采购项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-07</span>
-        <span>🏢 成都市新都区中医医院</span>
-        <span>📡 成都市新都区中医医院</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
-    </div>    <div class="project-card" onclick="window.location.href='p10.html'">
-      <div class="card-top">
-        <span class="stage-badge" style="background:#ede9fe;color:#7c3aed;">意见征集</span>
-        <span class="budget-badge">💰 未公布</span>
-      </div>
-      <h3 class="card-title">成都市新都区第三人民医院2027年网络安全等级保护及商用密码测评服务项目</h3>
-      <div class="card-info">
-        <span>📅 2026-08-07</span>
-        <span>🏢 成都市新都区第三人民医院</span>
-        <span>📡 成都市新都区第三人民医院</span>
-      </div>
-      <div class="card-arrow">查看招标解读 →</div>
+      <a href="project_01.html" class="project-link">查看分析 →</a>
     </div>
   </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-preview">02</div>
+      <div class="project-info">
+        <div class="project-title">西南石油大学2026年政府采购意向公开（第26批）</div>
+        <div class="project-subtitle">西南石油大学 | 2026-09-18 | 预算约823.4万元 | 含12个IT子项目</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-preview">采购意向</span>
+        <span class="badge badge-amount">823.4万</span>
+        <span class="badge badge-type">多品类IT</span>
+      </div>
+      <a href="project_02.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-active">03</div>
+      <div class="project-info">
+        <div class="project-title">新都区第三人民医院2026年网络安全等级保护及商用密码测评服务采购</div>
+        <div class="project-subtitle">成都市新都区第三人民医院 | 2026-09-17 | 预算44.28万 | 投标截止10-12</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-active">⚡ 可投标</span>
+        <span class="badge badge-amount">44.28万</span>
+        <span class="badge badge-type">等保+密评</span>
+      </div>
+      <a href="project_03.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-preview">04</div>
+      <div class="project-info">
+        <div class="project-title">新都区人民医院等保测评及商用密码应用安全性评估服务采购</div>
+        <div class="project-subtitle">成都市新都区人民医院 | 2026-09-15 | 预算40万 | 预计10月采购</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-preview">采购意向</span>
+        <span class="badge badge-amount">40万</span>
+        <span class="badge badge-type">等保+密评</span>
+      </div>
+      <a href="project_04.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-done">05</div>
+      <div class="project-info">
+        <div class="project-title">新都区中医医院弱电系统及网络设备维保服务采购（合同公告）</div>
+        <div class="project-subtitle">成都市新都区中医医院 | 2026-09-15 | 中标22.87万 | 四川云信服科技</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-done">已成交</span>
+        <span class="badge badge-amount">22.87万</span>
+        <span class="badge badge-type">弱电/网络维保</span>
+      </div>
+      <a href="project_05.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-preview">06</div>
+      <div class="project-info">
+        <div class="project-title">新都区中医医院网络安全等级保护三级测评服务采购</div>
+        <div class="project-subtitle">成都市新都区中医医院 | 2026-09-08 | 预算25.2万 | 预计11月采购</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-preview">采购意向</span>
+        <span class="badge badge-amount">25.2万</span>
+        <span class="badge badge-type">等保测评</span>
+      </div>
+      <a href="project_06.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-done">07</div>
+      <div class="project-info">
+        <div class="project-title">新都区融媒体中心网络安全服务采购</div>
+        <div class="project-subtitle">成都市新都区融媒体中心 | 2026-09-04 | 已成交（09-18发布）</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-done">已成交</span>
+        <span class="badge badge-type">网络安全服务</span>
+      </div>
+      <a href="project_07.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-research">08</div>
+      <div class="project-info">
+        <div class="project-title">新都区中医医院GPU云主机租赁服务调研公告</div>
+        <div class="project-subtitle">成都市新都区中医医院 | 2026-09-02 | 调研截止09-09（已过期）</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-research">调研公告</span>
+        <span class="badge badge-type">GPU云主机/大模型</span>
+      </div>
+      <a href="project_08.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-done">09</div>
+      <div class="project-info">
+        <div class="project-title">新都区中医医院弱电系统及网络设备维保服务采购（中标结果）</div>
+        <div class="project-subtitle">成都市新都区中医医院 | 2026-09-02 | 中标22.87万 | 评审95.45分</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-done">已中标</span>
+        <span class="badge badge-amount">22.87万</span>
+        <span class="badge badge-type">弱电/网络维保</span>
+      </div>
+      <a href="project_09.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-done">10</div>
+      <div class="project-info">
+        <div class="project-title">智慧香城新型基础设施建设项目（一期）-第三方测评服务采购</div>
+        <div class="project-subtitle">新都区 | 2026-09-02 | 中标公告 | 金额未公开</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-done">已成交</span>
+        <span class="badge badge-type">智慧城市/测评</span>
+      </div>
+      <a href="project_10.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-card-header">
+      <div class="project-number num-done">11</div>
+      <div class="project-info">
+        <div class="project-title">新都街道蜀都社区卫生服务中心2026年度网络隔离服务采购</div>
+        <div class="project-subtitle">成都市新都区新都街道蜀都社区卫生服务中心 | 2026-09-01 | 中标通知</div>
+      </div>
+      <div class="project-badges">
+        <span class="badge badge-done">已成交</span>
+        <span class="badge badge-type">网络隔离服务</span>
+      </div>
+      <a href="project_11.html" class="project-link">查看分析 →</a>
+    </div>
+  </div>
+
 </div>
 
-<div class="footer">
-  <p>📋 新都区招投标信息周报 — 招标文件解读 | 生成日期：2026-08-21</p>
-  <p>数据来源：千里马招标网、客户官网 | 落款：新都云中台</p>
-  <p style="margin-top:8px;">本工具由电信数智-集成服务部-产数交付支撑中心开发提供</p>
+<div class="page-footer">
+  📋 本分析基于公开信息整理 | 生成日期：2026-09-20 | 新都云中台<br>
+  <b>⚠️ 不确定项请标记并人工确认；不允许伪造资质、案例、证书、报价</b>
 </div>
 
-<script>
-function filterProjects(stage, el) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach(card => {
-    const badge = card.querySelector('.stage-badge').textContent;
-    if (stage === 'all' || badge === stage) {
-      card.style.display = '';
-    } else {
-      card.style.display = 'none';
-    }
-  });
-}
-</script>
 </body>
 </html>

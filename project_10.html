@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智慧香城新型基础设施建设项目第三方测评服务 — 招标分析</title>
+<style>
+  :root {
+    --bg: #f5f7fa; --card: #ffffff; --border: #e2e8f0;
+    --primary: #2563eb; --primary-light: #dbeafe;
+    --success: #16a34a; --success-light: #dcfce7;
+    --warning: #d97706; --warning-light: #fef3c7;
+    --danger: #dc2626; --danger-light: #fee2e2;
+    --text: #1e293b; --text-muted: #64748b;
+    --purple: #7c3aed; --purple-light: #ede9fe;
+    --teal: #0891b2; --teal-light: #cffafe;
+    --orange: #ea580c; --orange-light: #ffedd5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Microsoft YaHei','PingFang SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .page-header { background: linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%); color: #fff; padding: 24px 32px; }
+  .page-header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .page-header .subtitle { font-size: 13px; opacity: .8; }
+  .page-header .meta-row { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,.15); border-radius: 6px; padding: 4px 12px; font-size: 12px; }
+  .meta-chip b { margin-right: 4px; }
+  .time-nodes-section { margin: 0 32px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .time-nodes-header { display: flex; align-items: center; gap: 8px; background: linear-gradient(90deg,#0891b2,#06b6d4); color: #fff; padding: 10px 20px; font-size: 14px; font-weight: 700; }
+  .time-nodes-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .time-nodes-table th { background: var(--teal-light); color: var(--teal); padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .time-nodes-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .time-nodes-table tr:last-child td { border-bottom: none; }
+  .time-nodes-table .urgent-row { background: var(--danger-light); }
+  .time-nodes-table .urgent-row td:first-child { border-left: 4px solid var(--danger); }
+  .countdown-text { font-weight: 700; }
+  .countdown-text.urgent { color: var(--danger); }
+  .countdown-text.warning { color: var(--warning); }
+  .countdown-text.normal { color: var(--success); }
+  .mandatory-yes { color: var(--danger); font-weight: 700; }
+  .mandatory-no { color: var(--text-muted); }
+  .time-nodes-note { padding: 10px 16px; font-size: 12px; background: var(--warning-light); color: var(--warning); border-top: 1px solid #fde68a; display: flex; align-items: flex-start; gap: 6px; }
+  .progress-bar-wrap { background: #fff; padding: 16px 32px; border-bottom: 1px solid var(--border); }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+  .progress-bar-bg { background: #e2e8f0; border-radius: 999px; height: 10px; }
+  .progress-bar-fill { background: linear-gradient(90deg,#2563eb,#16a34a); height: 10px; border-radius: 999px; width: 0%; transition: width .4s; }
+  .progress-stats { display: flex; gap: 16px; margin-top: 8px; }
+  .stat-chip { font-size: 12px; padding: 2px 10px; border-radius: 999px; font-weight: 600; }
+  .stat-done { background: var(--success-light); color: var(--success); }
+  .stat-warn { background: var(--warning-light); color: var(--warning); }
+  .stat-total { background: var(--primary-light); color: var(--primary); }
+  .judgment-card { margin: 20px 32px; background: var(--card); border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; }
+  .judgment-card .card-title { background: var(--primary); color: #fff; padding: 10px 20px; font-size: 14px; font-weight: 700; }
+  .judgment-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .judgment-table th { background: var(--primary-light); color: var(--primary); padding: 8px 16px; text-align: left; font-weight: 600; }
+  .judgment-table td { padding: 8px 16px; border-bottom: 1px solid var(--border); }
+  .judgment-table tr:last-child td { border-bottom: none; }
+  .badge-ok { background: var(--success-light); color: var(--success); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+  .badge-warn { background: var(--warning-light); color: var(--warning); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+  .badge-info { background: var(--primary-light); color: var(--primary); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+  .risk-summary { margin: 0 32px 20px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .risk-card { background: var(--card); border-radius: 10px; padding: 14px 16px; border-left: 4px solid; }
+  .risk-card.high { border-color: var(--danger); }
+  .risk-card.med { border-color: var(--warning); }
+  .risk-card.low { border-color: var(--success); }
+  .risk-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .risk-card.high h4 { color: var(--danger); }
+  .risk-card.med h4 { color: var(--warning); }
+  .risk-card.low h4 { color: var(--success); }
+  .risk-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; }
+  .section { margin: 0 32px 20px; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 20px; user-select: none; }
+  .section-header:hover { background: #f8fafc; }
+  .section-header-left { display: flex; align-items: center; gap: 10px; }
+  .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .section-title { font-size: 14px; font-weight: 700; }
+  .section-count { font-size: 12px; color: var(--text-muted); margin-left: 6px; }
+  .section-arrow { font-size: 12px; color: var(--text-muted); transition: transform .2s; }
+  .section-arrow.open { transform: rotate(90deg); }
+  .section-body { background: var(--card); border: 1px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; overflow: hidden; display: none; }
+  .section-body.open { display: block; }
+  .check-item { display: flex; align-items: flex-start; padding: 10px 20px; border-bottom: 1px solid var(--border); gap: 10px; }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0; }
+  .check-label { flex: 1; font-size: 13px; cursor: pointer; }
+  .check-label .item-title { font-weight: 600; display: block; margin-bottom: 2px; }
+  .item-priority { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; flex-shrink: 0; margin-top: 2px; }
+  .p-critical { background: var(--danger-light); color: var(--danger); }
+  .p-high { background: var(--warning-light); color: var(--warning); }
+  .p-normal { background: var(--primary-light); color: var(--primary); }
+  .p-low { background: #f1f5f9; color: var(--text-muted); }
+  .overview-section { margin: 0 32px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .overview-section h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+  .overview-section p { font-size: 13px; color: var(--text); line-height: 1.8; }
+  .score-section { margin: 0 32px 20px; }
+  .score-section > h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .score-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 12px; }
+  .score-table th { background: #1e3a8a; color: #fff; padding: 8px 12px; text-align: left; }
+  .score-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .score-table tr:last-child td { border-bottom: none; }
+  .score-pts { font-weight: 700; color: var(--primary); }
+  .response-tag { font-size: 11px; padding: 2px 7px; border-radius: 4px; display: inline-block; }
+  .r-must { background: var(--danger-light); color: var(--danger); }
+  .r-key { background: var(--warning-light); color: var(--warning); }
+  .r-std { background: var(--primary-light); color: var(--primary); }
+  .gap-section { margin: 0 32px 20px; }
+  .gap-section > h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .gap-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 12px; }
+  .gap-table th { background: #f1f5f9; padding: 8px 14px; text-align: left; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  .gap-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .gap-table tr:last-child td { border-bottom: none; }
+  .urg-critical { color: var(--danger); font-weight: 700; }
+  .urg-high { color: var(--warning); font-weight: 700; }
+  .urg-normal { color: var(--primary); }
+  .page-footer { margin: 0 32px 40px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 12px; color: var(--text-muted); text-align: center; }
+  .back-link { display: inline-block; margin: 0 32px 20px; padding: 8px 16px; background: var(--primary); color: #fff; border-radius: 8px; text-decoration: none; font-size: 13px; }
+  .back-link:hover { background: #1e3a8a; }
+  @media (max-width: 768px) {
+    .page-header,.progress-bar-wrap { padding: 16px; }
+    .judgment-card,.risk-summary,.section,.gap-section,.score-section,.overview-section,.page-footer,.time-nodes-section { margin-left: 16px; margin-right: 16px; }
+    .risk-summary { grid-template-columns: 1fr; }
+    .meta-row { gap: 8px; }
+    .time-nodes-table { font-size: 11px; }
+    .time-nodes-table th,.time-nodes-table td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>智慧香城新型基础设施建设项目（一期）-新都区视觉中枢平台建设项目和空地联动城市全域巡检服务采购项目第三方测评服务采购 — 招标分析</h1>
+  <div class="subtitle">新都区相关单位 | 待定</div>
+  <div class="meta-row">
+    <div class="meta-chip"><b>信息类型：</b>中标公告</div>
+    <div class="meta-chip"><b>发布日期：</b>2026-09-02</div>
+    <div class="meta-chip"><b>金额/预算：</b>未公开</div>
+    <div class="meta-chip"><b>项目状态：</b>已完成</div>
+    <div class="meta-chip"><b>采购方式：</b>待确认</div>
+  </div>
+</div>
+
+<a href="../index.html" class="back-link">← 返回项目总览</a>
+
+<div class="time-nodes-section">
+  <div class="time-nodes-header">⏰ 关键时间节点</div>
+  <table class="time-nodes-table">
+    <thead>
+      <tr>
+        <th style="width:18%">事项</th>
+        <th style="width:20%">时间</th>
+        <th style="width:12%">剩余/状态</th>
+        <th style="width:10%">是否强制</th>
+        <th style="width:40%">备注</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="">
+          <td>中标公告</td>
+          <td>2026-09-02</td>
+          <td class="countdown-text normal">已完成</td>
+          <td>□ 否</td>
+          <td>项目结束</td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="time-nodes-note">
+    <span>⚠️</span>
+    <div>以上时间节点基于已获取的公开信息整理，具体以正式招标文件为准。</div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-label"><span>分析完成进度</span><span id="pct-text">0%</span></div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-fill"></div></div>
+  <div class="progress-stats">
+    <span class="stat-chip stat-done" id="done-count">✔ 已确认 0</span>
+    <span class="stat-chip stat-warn" id="pending-count">⏳ 待确认 0</span>
+    <span class="stat-chip stat-total" id="total-count">📝 总计 0</span>
+  </div>
+</div>
+
+<div class="judgment-card">
+  <div class="card-title">⚡ 投标方式判定结论</div>
+  <table class="judgment-table">
+    <tr><th style="width:18%">判定维度</th><th style="width:22%">判定结果</th><th style="width:40%">依据</th><th style="width:20%">状态</th></tr>
+    
+        <tr>
+          <td>项目状态</td>
+          <td><b>已完成</b></td>
+          <td>中标公告</td>
+          <td><span class="badge-ok">✅ 确定</span></td>
+        </tr>
+        <tr>
+          <td>采购方式</td>
+          <td><b>待确认</b></td>
+          <td>信息有限</td>
+          <td><span class="badge-warn">⚠️ 待定</span></td>
+        </tr>
+  </table>
+</div>
+
+<div class="risk-summary">
+  <div class="risk-card high">
+    <h4>🔴 高风险（1项）</h4>
+    <p>项目已完成，无投标机会</p>
+  </div>
+  <div class="risk-card med">
+    <h4>🟡 中风险（1项）</h4>
+    <p>信息有限，仅从汇总表获取</p>
+  </div>
+  <div class="risk-card low">
+    <h4>🟢 低风险（1项）</h4>
+    <p>可作为智慧城市项目参考</p>
+  </div>
+</div>
+
+<div class="overview-section">
+  <h3>📋 项目概况</h3>
+  <p>智慧香城新型基础设施建设项目（一期）第三方测评服务采购，涉及新都区视觉中枢平台建设和空地联动城市全域巡检服务，涵盖通信、网络领域。项目已完成采购流程。</p>
+  <p style="margin-top:10px;"><b>原文链接：</b><a href="/（无链接）" target="_blank" style="color:var(--primary);">/（无链接）</a></p>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggleSection('req')">
+    <div class="section-header-left">
+      <div class="section-icon" style="background:var(--primary-light);color:var(--primary);">📄</div>
+      <span class="section-title">采购需求</span>
+      <span class="section-count">(4项)</span>
+    </div>
+    <span class="section-arrow" id="arr-req">▶</span>
+  </div>
+  <div class="section-body" id="body-req">
+        <div class="check-item">
+          <input type="checkbox">
+          <label class="check-label">
+            <span class="item-title">第三方测评服务</span>
+          </label>
+          <span class="item-priority p-high">重要</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox">
+          <label class="check-label">
+            <span class="item-title">新都区视觉中枢平台建设项目测评</span>
+          </label>
+          <span class="item-priority p-high">重要</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox">
+          <label class="check-label">
+            <span class="item-title">空地联动城市全域巡检服务测评</span>
+          </label>
+          <span class="item-priority p-high">重要</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox">
+          <label class="check-label">
+            <span class="item-title">涉及通信、网络领域</span>
+          </label>
+          <span class="item-priority p-high">重要</span>
+        </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggleSection('qual')">
+    <div class="section-header-left">
+      <div class="section-icon" style="background:var(--warning-light);color:var(--warning);">☑</div>
+      <span class="section-title">资格要求</span>
+      <span class="section-count">(1项)</span>
+    </div>
+    <span class="section-arrow" id="arr-qual">▶</span>
+  </div>
+  <div class="section-body" id="body-qual">
+        <div class="check-item">
+          <input type="checkbox">
+          <label class="check-label">
+            <span class="item-title">详见原始招标文件</span>
+          </label>
+          <span class="item-priority p-normal">正常</span>
+        </div>
+  </div>
+</div>
+
+<div class="score-section">
+  <h3>📊 评分要素响应矩阵</h3>
+  <table class="score-table">
+    <tr><th>评分要素</th><th>分值/权重</th><th>评分标准</th><th>响应状态</th><th>建议</th></tr>
+    
+        <tr>
+          <td class="score-pts">项目状态</td>
+          <td>已完成</td>
+          <td>汇总表</td>
+          <td><span class="response-tag r-must">已完成</span></td>
+          <td>参考</td>
+        </tr>
+  </table>
+</div>
+
+<div class="gap-section">
+  <h3>🚨 关键缺口清单</h3>
+  <table class="gap-table">
+    <tr><th style="width:8%">优先级</th><th style="width:25%">缺口项目</th><th style="width:40%">说明</th><th style="width:27%">补救建议</th></tr>
+    
+        <tr>
+          <td class="urg-normal">正常</td>
+          <td>详细项目信息</td>
+          <td>原始表中无链接</td>
+          <td>搜索四川政府采购网</td>
+        </tr>
+  </table>
+</div>
+
+<div class="page-footer">
+  📋 本分析基于公开信息整理 | 生成日期：2026-09-20 |
+  <b>⚠️ 不确定项请标记并人工确认；不允许伪造资质、案例、证书、报价</b>
+</div>
+
+<script>
+  function toggleSection(id) {
+    const body = document.getElementById('body-' + id);
+    const arrow = document.getElementById('arr-' + id);
+    if (body.classList.contains('open')) {
+      body.classList.remove('open');
+      arrow.classList.remove('open');
+    } else {
+      body.classList.add('open');
+      arrow.classList.add('open');
+    }
+    updateProgress();
+  }
+  function updateProgress() {
+    const all = document.querySelectorAll('.check-item input[type="checkbox"]');
+    const checked = document.querySelectorAll('.check-item input[type="checkbox"]:checked');
+    const total = all.length;
+    const done = checked.length;
+    const pct = total > 0 ? Math.round(done / total * 100) : 0;
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('pct-text').textContent = pct + '%';
+    document.getElementById('done-count').textContent = '✔ 已确认 ' + done;
+    document.getElementById('pending-count').textContent = '⏳ 待确认 ' + (total - done);
+    document.getElementById('total-count').textContent = '📝 总计 ' + total;
+    all.forEach(cb => {
+      const item = cb.closest('.check-item');
+      if (cb.checked) item.style.background = 'var(--success-light)';
+      else item.style.background = '';
+    });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    updateProgress();
+    const firstSec = document.querySelector('[id^="body-"]');
+    if (firstSec) { firstSec.classList.add('open'); const arr = document.getElementById(firstSec.id.replace('body','arr')); if(arr) arr.classList.add('open'); }
+  });
+</script>
+</body>
+</html>
